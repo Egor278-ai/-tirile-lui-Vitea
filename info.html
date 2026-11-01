@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1683ff">
+    <title>Știrile lui Vitea</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        media="print" onload="this.media='all'">
+</head>
+
+<body class="halloween-theme">
+
+    <div class="halloween-atmosphere" aria-hidden="true">
+        <span class="halloween-spiderweb halloween-spiderweb-left"></span>
+        <span class="halloween-spiderweb halloween-spiderweb-right"></span>
+        <span class="halloween-pumpkin pumpkin-one">🎃</span>
+        <span class="halloween-pumpkin pumpkin-two">🎃</span>
+        <span class="halloween-bat bat-one">🦇</span>
+        <span class="halloween-bat bat-two">🦇</span>
+        <span class="halloween-spider spider-one">🕷️</span>
+    </div>
+
+    <!-- LOADER -->
+    <div id="loader" class="loader">
+        <div class="loader-box">
+            <div class="loader-logo">V</div>
+            <h2 class="animated-section-title loader-title">
+                <span class="sway-title-text">Știrile lui Vitea</span>
+                <i class="fa-solid fa-newspaper spin-title-icon" aria-hidden="true"></i>
+            </h2>
+            <p id="loaderText" class="loader-text">Se încarcă...</p>
+
+            <div class="loader-bar">
+                <span id="loaderProgress"></span>
+            </div>
+
+            <button id="skipLoader" class="skip-btn">Skip</button>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="site-header">
+        <div class="brand-area">
+            <button id="hamburger" class="hamburger" aria-label="Deschide meniul">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="update-unread-dot" aria-hidden="true"></span>
+            </button>
+
+            <div class="brand">
+                <div class="brand-icon">V</div>
+                <div>
+                    <h1>Știrile lui Vitea</h1>
+                    <p>Informații și noutăți</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- DESKTOP NAVIGATION -->
+        <nav class="desktop-navigation">
+            <a href="index.html" data-tooltip="Acasă" aria-label="Acasă">
+                <i class="fa-solid fa-house"></i>
+                <span>Acasă</span>
+            </a>
+
+            <a href="news.html" data-tooltip="Ultimele știri" aria-label="Ultimele știri">
+                <i class="fa-solid fa-newspaper"></i>
+                <span>Ultimele știri</span>
+            </a>
+
+            <a href="info.html" data-tooltip="Informații" aria-label="Informații">
+                <i class="fa-solid fa-circle-info"></i>
+                <span>Informații</span>
+            </a>
+
+            <a href="contact.html" data-tooltip="Contact / recenzii" aria-label="Contact și recenzii">
+                <i class="fa-solid fa-envelope"></i>
+                <span>Contact</span>
+            </a>
+
+        </nav>
+
+        <div class="mobile-header-controls" aria-label="Instrumente rapide">
+            <button class="mobile-header-action" id="searchHeaderBtn" type="button" title="Caută pe site"
+                aria-label="Caută pe site">
+                <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+            </button>
+            <button class="mobile-header-action" id="timeHeaderBtn" type="button" title="Ora actuală"
+                aria-label="Vezi ora actuală">
+                <i class="fa-regular fa-clock" aria-hidden="true"></i>
+            </button>
+            <button class="mobile-header-action" id="soundHeaderBtn" type="button" title="Alege sunetul"
+                aria-label="Alege sunetul pentru apăsări" aria-haspopup="dialog" aria-controls="soundPickerModal">
+                <i class="fa-solid fa-volume-xmark" aria-hidden="true"></i>
+            </button>
+            <button class="mobile-header-action" id="refreshHeaderBtn" type="button" title="Reîmprospătează site-ul"
+                aria-label="Reîmprospătează site-ul">
+                <i class="fa-solid fa-rotate-right" aria-hidden="true"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- MOBILE MENU -->
+    <aside id="sideMenu" class="side-menu">
+
+        <div class="side-menu-header">
+            <div class="side-title">
+                <div class="brand-icon">V</div>
+                <div>
+                    <strong>Știrile lui Vitea</strong>
+                    <small>Meniu</small>
+                    <small class="menu-close-hint">Pentru închidere: apasă Space sau glisează spre stânga</small>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- MOBILE TOOLS -->
+        <div class="mobile-tools">
+            <div class="mobile-tools-title">
+                <i class="fa-solid fa-toolbox"></i>
+                Instrumente
+            </div>
+
+            <button class="mobile-tool" id="mobileScrollTop">
+                <span class="mobile-tool-icon">
+                    <i class="fa-solid fa-arrow-up"></i>
+                </span>
+                <div>
+                    <strong>Mergi sus</strong>
+                    <small>Du-te în partea de sus</small>
+                </div>
+            </button>
+
+            <button class="mobile-tool" id="mobileNotes">
+                <span class="mobile-tool-icon">
+                    <i class="fa-solid fa-note-sticky"></i>
+                </span>
+                <div>
+                    <strong>Notițe</strong>
+                    <small>Deschide notițele personale</small>
+                </div>
+            </button>
+
+            <button class="mobile-tool" id="mobileUpdates">
+                <span class="mobile-tool-icon">
+                    <i class="fa-solid fa-bell"></i>
+                    <span class="update-unread-mark" aria-hidden="true">!</span>
+                </span>
+                <div>
+                    <strong>Notify Changes</strong>
+                    <small>Vezi ultimele notificări</small>
+                </div>
+            </button>
+
+            <button class="mobile-tool" id="mobileScrollBottom">
+                <span class="mobile-tool-icon">
+                    <i class="fa-solid fa-arrow-down"></i>
+                </span>
+                <div>
+                    <strong>Mergi jos</strong>
+                    <small>Du-te în partea de jos</small>
+                </div>
+            </button>
+
+            <button class="mobile-tool" id="mobileSettings">
+                <span class="mobile-tool-icon">
+                    <i class="fa-solid fa-gear"></i>
+                </span>
+                <div>
+                    <strong>Setări</strong>
+                    <small>Personalizează site-ul</small>
+                </div>
+            </button>
+
+            <button class="mobile-tool" id="mobilePoints">
+                <span class="mobile-tool-icon">
+                    <i class="fa-solid fa-users"></i>
+                </span>
+                <div>
+                    <strong>Despre noi</strong>
+                    <small>Cunoaște echipa site-ului</small>
+                </div>
+            </button>
+
+            <button class="mobile-tool" id="mobileFortuneWheel">
+                <span class="mobile-tool-icon">
+                    <i class="fa-solid fa-dharmachakra"></i>
+                </span>
+                <div>
+                    <strong>Roata norocului</strong>
+                    <small>Află dacă Vitea face știri azi</small>
+                </div>
+            </button>
+
+            <button class="mobile-tool halloween-mobile-tool" id="mobileHalloweenInventory">
+                <span class="mobile-tool-icon">
+                    <i class="fa-solid fa-box-open"></i>
+                </span>
+                <div>
+                    <strong>Inventar Halloween</strong>
+                    <small>Accesorii, boosturi, sunet și muzică</small>
+                </div>
+            </button>
+
+            <button class="mobile-tool halloween-mobile-tool" id="mobileHalloweenShop">
+                <span class="mobile-tool-icon">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                </span>
+                <div>
+                    <strong>Halloween Shop</strong>
+                    <small>Questuri, bomboane și recompense</small>
+                </div>
+            </button>
+
+            <button class="mobile-tool halloween-mobile-tool" id="mobileHalloweenEvent">
+                <span class="mobile-tool-icon">
+                    <i class="fa-solid fa-ghost"></i>
+                </span>
+                <div>
+                    <strong>Halloween Event</strong>
+                    <small>Deschide questurile și recompensele</small>
+                </div>
+            </button>
+
+        </div>
+    </aside>
+
+
+    <div id="menuOverlay" class="menu-overlay"></div>
+
+    <!-- DESKTOP RIGHT CONTROLS -->
+    <div class="top-right-controls">
+        <button id="rightControlsToggle" class="control-toggle" type="button" title="Ascunde controalele din dreapta"
+            aria-label="Ascunde controalele din dreapta" aria-expanded="true" aria-controls="rightControlTools">
+            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+        </button>
+
+        <div class="control-tools" id="rightControlTools" aria-hidden="false">
+            <button class="control-tool" id="scrollTopBtn" title="Mergi sus" aria-label="Mergi sus">
+                <i class="fa-solid fa-arrow-up"></i>
+            </button>
+
+            <button class="control-tool" id="notesBtn" title="Notițe" aria-label="Notițe">
+                <i class="fa-solid fa-note-sticky"></i>
+            </button>
+
+            <button class="control-tool has-update-indicator" id="updatesBtn" title="Notify Changes"
+                aria-label="Notify Changes">
+                <i class="fa-solid fa-bell"></i>
+                <span class="update-unread-mark" aria-hidden="true">!</span>
+            </button>
+
+            <button class="control-tool" id="scrollBottomBtn" title="Mergi jos" aria-label="Mergi jos">
+                <i class="fa-solid fa-arrow-down"></i>
+            </button>
+
+            <button class="control-tool" id="questionBtn" title="Funcții rapide" aria-label="Deschide funcțiile rapide">
+                <i class="fa-solid fa-bolt"></i>
+            </button>
+
+            <button class="control-tool" id="settingsBtn" title="Setări">
+                <i class="fa-solid fa-gear"></i>
+            </button>
+
+            <button class="control-tool" id="fortuneWheelBtn" title="Roata norocului"
+                aria-label="Deschide roata norocului">
+                <i class="fa-solid fa-dharmachakra"></i>
+            </button>
+
+            <button class="control-tool" id="pointsBtn" title="Despre noi" aria-label="Despre noi">
+                <i class="fa-solid fa-users"></i>
+            </button>
+
+            <button class="control-tool halloween-inventory-button" id="halloweenInventoryBtn" title="Inventar Halloween"
+                aria-label="Deschide inventarul Halloween">
+                <i class="fa-solid fa-box-open"></i>
+            </button>
+
+            <button class="control-tool halloween-shop-button" id="halloweenShopBtn" title="Halloween Shop"
+                aria-label="Halloween Shop">
+                <i class="fa-solid fa-bag-shopping"></i>
+            </button>
+        </div>
+    </div>
+    <!-- MAIN -->
+    <main>
+
+        <!-- HOME -->
+        
+        <!-- NEWS -->
+        
+
+
+
+
+        <!-- INFO -->
+        <section id="info" class="section">
+
+            <div class="section-heading">
+                <span class="section-label">INFORMAȚII</span>
+                <h2 class="animated-section-title">
+                    <span class="sway-title-text">Despre proiect</span>
+                    <i class="fa-solid fa-circle-info spin-title-icon" aria-hidden="true"></i>
+                </h2>
+                <p>
+                    Știrile lui Vitea este un proiect simplu,
+                    modern și ușor de folosit.
+                </p>
+            </div>
+
+            <div class="info-grid">
+
+                <div class="info-box">
+                    <div class="info-icon"></div>
+                    <h3>Rapid</h3>
+                    <p>
+                        Site-ul este creat pentru acces rapid
+                        la informații.
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-icon">±</div>
+                    <h3>Responsive</h3>
+                    <p>
+                        Funcționează atăt pe calculator,
+                        cât și pe telefon.
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-icon">µ</div>
+                    <h3>Design modern</h3>
+                    <p>
+                        Interfață dark cu accente albastre
+                        și animații.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        
+
+    </main>
+
+    <dialog id="halloweenEventDialog" class="halloween-event-dialog" aria-labelledby="halloweenEventTitle">
+        <div class="halloween-event-header">
+            <div>
+                <span class="halloween-event-eyebrow">EVENIMENT LIMITAT</span>
+                <h2 id="halloweenEventTitle">&#127875; Halloween Event</h2>
+            </div>
+            <button type="button" class="halloween-event-close" data-halloween-close aria-label="Închide Halloween Event">×</button>
+        </div>
+
+        <div class="halloween-candy-counter" aria-live="polite">
+            <span class="halloween-candy-icon">🍬</span>
+            <span>Bomboane</span>
+            <strong id="halloweenCandyCount">0</strong>
+        </div>
+
+        <div class="halloween-event-tabs" role="tablist" aria-label="Secțiunile Halloween Event">
+            <button type="button" class="active" role="tab" aria-selected="true" data-halloween-tab="event">Halloween Event</button>
+            <button type="button" role="tab" aria-selected="false" data-halloween-tab="quests">Questuri</button>
+            <button type="button" role="tab" aria-selected="false" data-halloween-tab="rewards">Recompense</button>
+            <button type="button" role="tab" aria-selected="false" data-halloween-tab="games">Jocuri</button>
+        </div>
+
+        <div class="halloween-event-content">
+            <section class="halloween-tab-panel active" data-halloween-panel="event">
+                <div class="halloween-event-banner">
+                    <span>&#127875;</span>
+                    <div>
+                        <h3>Halloween Event</h3>
+                        <p>Completează questuri, adună bomboane și revendică recompensele evenimentului.</p>
+                    </div>
+                        <div class="halloween-event-countdown" aria-label="Timpul rămas din eveniment">
+                            <strong>Evenimentul se termină în</strong>
+                            <span id="halloweenCountdown">14d 00h 00m 00s</span>
+                        </div>
+                    </div>
+                <div class="halloween-progress-card">
+                    <span>Progresul colecției</span>
+                    <strong id="halloweenCollectionProgress">0/7 recompense</strong>
+                    <div class="halloween-progress-track"><span id="halloweenCollectionBar"></span></div>
+                </div>
+            </section>
+
+            <section class="halloween-tab-panel" data-halloween-panel="quests">
+                <div class="halloween-quest-list">
+                    <article class="halloween-quest" data-quest="time5">
+                        <span class="halloween-quest-icon">&#9201;&#65039;</span>
+                        <div><strong>Stai pe site 5 minute</strong><small><span data-quest-progress="time5">0/5 minute</span></small></div>
+                        <button type="button" data-quest-action="time5">20 &#127853;</button>
+                    </article>
+                    <article class="halloween-quest" data-quest="settings">
+                        <span class="halloween-quest-icon">&#9881;&#65039;</span>
+                        <div><strong>Deschide Setările</strong><small>Intră în panoul de personalizare</small></div>
+                        <button type="button" data-quest-action="settings">10 &#127853;</button>
+                    </article>
+                    <article class="halloween-quest" data-quest="purchase">
+                        <span class="halloween-quest-icon">&#128717;&#65039;</span>
+                        <div><strong>Cumpără ceva în Shop</strong><small>Finalizează prima achiziție Halloween</small></div>
+                        <button type="button" data-quest-action="purchase">30 &#127853;</button>
+                    </article>
+                    <article class="halloween-quest" data-quest="time20">
+                        <span class="halloween-quest-icon">&#127769;</span>
+                        <div><strong>Stai pe site 20 minute</strong><small><span data-quest-progress="time20">0/20 minute</span></small></div>
+                        <button type="button" data-quest-action="time20">40 &#127853;</button>
+                    </article>
+                    <article class="halloween-quest" data-quest="contact">
+                        <span class="halloween-quest-icon">&#9997;&#65039;</span>
+                        <div><strong>Scrie o recenzie</strong><small>Completează formularul de contact sau recenzie</small></div>
+                        <button type="button" data-quest-action="contact">30 &#127853;</button>
+                    </article>
+                    <article class="halloween-quest" data-quest="accessories3"><span class="halloween-quest-icon">🎒</span><div><strong>Cumpără 3 accesorii</strong><small>Din Halloween Shop</small></div><button type="button" data-quest-action="accessories3">200 🍬</button></article>
+                    <article class="halloween-quest" data-quest="hanganuName"><span class="halloween-quest-icon">👻</span><div><strong>Dă un nume lui Hanganu</strong><small>Selectează unul dintre cele 6 nume</small></div><button type="button" data-quest-action="hanganuName">120 🍬</button></article>
+                    <article class="halloween-quest" data-quest="time60"><span class="halloween-quest-icon">⌛</span><div><strong>Așteaptă 1 oră pe site</strong><small><span data-quest-progress="time60">0/60 minute</span></small></div><button type="button" data-quest-action="time60">300 🍬</button></article>
+                    <article class="halloween-quest" data-quest="nichitaNote"><span class="halloween-quest-icon">📝</span><div><strong>Salvează în Notițe</strong><small>„Nichita e colțeta”</small></div><button type="button" data-quest-action="nichitaNote">150 🍬</button></article>
+                    <article class="halloween-quest" data-quest="time30"><span class="halloween-quest-icon">⏰</span><div><strong>Stai pe site 30 de minute</strong><small><span data-quest-progress="time30">0/30 minute</span></small></div><button type="button" data-quest-action="time30">250 🍬</button></article>
+                </div>
+            </section>
+
+            <section class="halloween-tab-panel" data-halloween-panel="games">
+                <div class="halloween-games-grid">
+                    <article class="halloween-game-card"><span class="halloween-game-icon">🔢</span><h3>Descifrează numărul</h3><p>Uită-te la desen și descifrează numărul magic.</p><div class="halloween-puzzle-runes" data-puzzle-runes></div><input class="halloween-game-input" data-puzzle-answer type="number" min="1000" max="9999" placeholder="Numărul din 4 cifre"><button type="button" class="halloween-game-start" data-puzzle-start>Începe jocul</button><small data-puzzle-status>Recompensă: 50 🍬</small></article>
+                    <article class="halloween-game-card"><span class="halloween-game-icon">🧩</span><h3>Labirintul Halloween</h3><p>Folosește săgețile sau W-A-S-D pentru a ajunge la ieșire.</p><div class="halloween-maze" data-halloween-maze tabindex="0" aria-label="Labirint Halloween"></div><button type="button" class="halloween-game-start" data-maze-start>Începe labirintul</button><small data-maze-status>Recompensă: 50 🍬</small></article>
+                    <article class="halloween-game-card"><span class="halloween-game-icon">👆</span><h3>50 de atingeri</h3><p>Apasă butonul de 50 de ori pentru premiul jocului.</p><div class="halloween-click-progress" data-click-progress>0 / 50</div><button type="button" class="halloween-game-click" data-click-game>APASĂ</button><small data-click-status>Recompensă: 50 🍬</small></article>
+                    <article class="halloween-game-card"><span class="halloween-game-icon">👻</span><h3>Numele lui Hanganu</h3><p>Scrie orice nume și înscrie-l pe tablă.</p><input class="halloween-game-input" data-hanganu-input maxlength="24" placeholder="Numele Hanganu"><button type="button" class="halloween-game-start" data-hanganu-save>Scrie pe tablă</button><div class="halloween-name-board"><span data-hanganu-board>Hanganu</span></div></article>
+                    <article class="halloween-game-card halloween-chess-card"><span class="halloween-game-icon">♟️</span><h3>Șah Halloween</h3><p>Joacă împotriva botului pe tablă tematică.</p><div class="halloween-chess" data-halloween-chess></div><button type="button" class="halloween-game-start" data-chess-reset>Joc nou</button><small data-chess-status>Alege o piesă albă.</small></article>
+                </div>
+            </section>
+
+            <section class="halloween-tab-panel" data-halloween-panel="rewards">
+                <div class="halloween-reward-grid">
+                    <article class="halloween-reward" data-reward="Lucky Booster"><span>✨</span><strong>Lucky Booster</strong><button type="button" data-buy-reward="Lucky Booster" data-cost="25" data-category="boosts">25 🍬</button></article>
+                    <article class="halloween-reward" data-reward="Fundal Halloween"><span>🖼️</span><strong>Fundal Halloween</strong><button type="button" data-buy-reward="Fundal Halloween" data-cost="30" data-category="accessories">30 🍬</button></article>
+                    <article class="halloween-reward" data-reward="Muzică Halloween"><span>🎵</span><strong>Muzică Halloween</strong><button type="button" data-buy-reward="Muzică Halloween" data-cost="35" data-category="music">35 🍬</button></article>
+                    <article class="halloween-reward" data-reward="Sunet Halloween"><span>🔊</span><strong>Sunet Halloween</strong><button type="button" data-buy-reward="Sunet Halloween" data-cost="20" data-category="sounds">20 🍬</button></article>
+                    <article class="halloween-reward" data-reward="Iconiță Halloween"><span>🎃</span><strong>Iconiță Halloween</strong><button type="button" data-buy-reward="Iconiță Halloween" data-cost="15" data-category="accessories">15 🍬</button></article>
+                    <article class="halloween-reward" data-reward="Screamer Monster"><span>👾</span><strong>Screamer Monster</strong><button type="button" data-buy-reward="Screamer Monster" data-cost="75" data-category="boosts">75 🍬</button></article>
+                    <article class="halloween-reward" data-reward="Dovleac pe cap"><span>🎃</span><strong>Dovleac pe cap</strong><button type="button" data-buy-reward="Dovleac pe cap" data-cost="150" data-category="accessories">150 🍬</button></article>
+                    <article class="halloween-reward" data-reward="Balonul magic"><span>🎈</span><strong>Balonul magic</strong><button type="button" data-buy-reward="Balonul magic" data-cost="600" data-category="accessories">600 🍬</button></article>
+                    <article class="halloween-reward" data-reward="Îmbrăcăminte violetă"><span>👕</span><strong>Îmbrăcăminte violetă</strong><button type="button" data-buy-reward="Îmbrăcăminte violetă" data-cost="450" data-category="accessories">450 🍬</button></article>
+                    <article class="halloween-reward" data-reward="Foarte Lucky Booster"><span>🍀</span><strong>Foarte Lucky Booster</strong><button type="button" data-buy-reward="Foarte Lucky Booster" data-cost="1000" data-category="boosts">1000 🍬</button></article>
+                    <article class="halloween-reward" data-reward="Nume pentru Hanganu"><span>👻</span><strong>Nume pentru Hanganu</strong><button type="button" data-buy-reward="Nume pentru Hanganu" data-cost="300" data-category="accessories">300 🍬</button></article>
+                    <article class="halloween-reward" data-reward="Halloween Man"><span>🦇</span><strong>Halloween Man</strong><button type="button" data-buy-reward="Halloween Man" data-cost="10000" data-category="accessories">10.000 🍬</button></article>
+                </div>
+            </section>
+        </div>
+    </dialog>
+
+    <dialog id="halloweenPurchaseDialog" class="halloween-purchase-dialog" aria-labelledby="halloweenPurchaseTitle">
+        <button type="button" class="halloween-purchase-close" data-purchase-close aria-label="Închide">×</button>
+        <span id="halloweenPurchaseIcon" class="halloween-purchase-icon">🎃</span>
+        <span class="halloween-event-eyebrow">HALLOWEEN SHOP</span>
+        <h2 id="halloweenPurchaseTitle">Articol Halloween</h2>
+        <p id="halloweenPurchaseDescription"></p>
+        <strong id="halloweenPurchasePrice" class="halloween-purchase-price"></strong>
+        <button type="button" id="confirmHalloweenPurchase" class="primary-btn">Cumpără acum</button>
+    </dialog>
+
+    <div id="halloweenScreamer" class="halloween-screamer" aria-hidden="true">
+        <div class="halloween-screamer-flash"></div>
+        <div class="halloween-monster">№</div>
+    </div>
+
+    <div id="halloweenPumpkinHead" class="halloween-pumpkin-head" aria-hidden="true">
+        <span class="pumpkin-eye pumpkin-eye-left"></span>
+        <span class="pumpkin-eye pumpkin-eye-right"></span>
+        <button type="button" id="removePumpkinHead" class="pumpkin-remove-button">Scoate dovleacul</button>
+    </div>
+
+    <dialog id="halloweenInventoryDialog" class="halloween-inventory-dialog" aria-labelledby="halloweenInventoryTitle">
+        <div class="halloween-inventory-header">
+            <div>
+                <span class="halloween-inventory-eyebrow">HALLOWEEN</span>
+                <h2 id="halloweenInventoryTitle"><i class="fa-solid fa-box-open" aria-hidden="true"></i> Inventar</h2>
+            </div>
+            <button type="button" class="halloween-inventory-close" data-inventory-close aria-label="Închide inventarul">×</button>
+        </div>
+        <div class="halloween-inventory-tabs" role="tablist" aria-label="Categorii inventar">
+            <button class="active" type="button" role="tab" aria-selected="true" data-inventory-tab="accessories"><i class="fa-solid fa-glasses"></i><span>Accesorii</span></button>
+            <button type="button" role="tab" aria-selected="false" data-inventory-tab="boosts"><i class="fa-solid fa-bolt"></i><span>Boosturi</span></button>
+            <button type="button" role="tab" aria-selected="false" data-inventory-tab="sounds"><i class="fa-solid fa-volume-high"></i><span>Sunet</span></button>
+            <button type="button" role="tab" aria-selected="false" data-inventory-tab="music"><i class="fa-solid fa-music"></i><span>Muzică</span></button>
+        </div>
+        <div class="halloween-inventory-content">
+            <section class="halloween-inventory-panel active" data-inventory-panel="accessories">
+                <div class="inventory-empty"><span>🎃</span><h3>Accesorii Halloween</h3><p>Recompensele cumpărate din magazin apar aici.</p></div>
+            </section>
+            <section class="halloween-inventory-panel" data-inventory-panel="boosts"><div class="inventory-empty"><span></span><h3>Boosturi</h3><p>Boosturile obținute în eveniment vor apărea aici.</p></div></section>
+            <section class="halloween-inventory-panel" data-inventory-panel="sounds"><div class="inventory-empty"><span>🔊</span><h3>Sunet</h3><p>Sunetele Halloween deblocate vor fi disponibile aici.</p></div></section>
+            <section class="halloween-inventory-panel" data-inventory-panel="music"><div class="inventory-empty"><span>µ</span><h3>Muzică</h3><p>Muzica de Halloween deblocată va fi așezată aici.</p></div></section>
+        </div>
+    </dialog>
+
+    <!-- MOBILE BOTTOM NAVIGATION -->
+    <nav class="bottom-navigation">
+
+        <a href="index.html">
+            <i class="fa-solid fa-house"></i>
+            <small>Acasă</small>
+        </a>
+
+        <a href="news.html">
+            <i class="fa-solid fa-newspaper"></i>
+            <small>Ultimele știri</small>
+        </a>
+
+        <a href="info.html">
+            <i class="fa-solid fa-circle-info"></i>
+            <small>Info</small>
+        </a>
+
+        <a href="contact.html">
+            <i class="fa-solid fa-envelope"></i>
+            <small>Contact</small>
+        </a>
+
+    </nav>
+
+
+
+    <!-- MOBILE HEADER PANELS -->
+    <div id="searchModal" class="modal">
+        <div class="modal-box mobile-search-box" role="dialog" aria-modal="true" aria-labelledby="searchModalTitle">
+            <button class="modal-close" data-close="searchModal" aria-label="Închide căutarea">×</button>
+            <div class="modal-icon"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></div>
+            <h2 id="searchModalTitle">Caută pe site</h2>
+            <p>Găsește rapid meniuri, instrumente și acțiuni.</p>
+            <div class="site-search-field">
+                <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                <input id="siteSearchInput" type="search" placeholder="Caută sau spune ce cauți..." autocomplete="off"
+                    aria-label="Caută pe site">
+                <span class="voice-waveform" aria-hidden="true">
+                    <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                </span>
+                <button id="voiceSearchButton" class="voice-search-button" type="button" title="Caută cu vocea"
+                    aria-label="Caută cu vocea" aria-pressed="false">
+                    <i id="voiceSearchIcon" class="fa-solid fa-microphone" aria-hidden="true"></i>
+                </button>
+            </div>
+            <p id="voiceSearchStatus" class="voice-search-status" role="status" aria-live="polite"></p>
+            <div id="siteSearchResults" class="site-search-results" aria-label="Rezultatele căutării"></div>
+            <p id="siteSearchEmpty" class="site-search-empty" hidden>Nu am găsit rezultate.</p>
+        </div>
+    </div>
+
+    <div id="timeModal" class="modal">
+        <div class="modal-box utility-modal-box" role="dialog" aria-modal="true" aria-labelledby="timeModalTitle">
+            <button class="modal-close" data-close="timeModal" aria-label="Închide ceasul">×</button>
+            <div class="modal-icon"><i class="fa-regular fa-clock" aria-hidden="true"></i></div>
+            <h2 id="timeModalTitle">Ora actuală</h2>
+            <p id="currentDate" class="current-date"></p>
+            <time id="currentTime" class="current-time" aria-live="off">--:--:--</time>
+        </div>
+    </div>
+
+    <div id="refreshModal" class="modal">
+        <div class="modal-box utility-modal-box" role="dialog" aria-modal="true" aria-labelledby="refreshModalTitle">
+            <button class="modal-close" data-close="refreshModal" aria-label="Închide confirmarea">×</button>
+            <div class="modal-icon"><i class="fa-solid fa-rotate-right" aria-hidden="true"></i></div>
+            <h2 id="refreshModalTitle">Reîmprospătezi site-ul?</h2>
+            <p>Vrei să faci refresh la site?</p>
+            <div class="refresh-actions">
+                <button class="secondary-btn" data-close="refreshModal" type="button">Anulează</button>
+                <button id="confirmSiteRefresh" class="primary-btn" type="button">Da, fă refresh</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- NOTES MODAL -->
+    <div id="notesModal" class="modal">
+        <div class="modal-box">
+
+            <button class="modal-close" data-close="notesModal">×</button>
+
+            <div class="modal-icon">”</div>
+            <h2>Notițele mele</h2>
+            <p>Scrie și salvează notițele tale.</p>
+
+            <textarea id="notesText" class="notes-textarea" placeholder="Scrie aici..."></textarea>
+
+            <button id="saveNotes" class="primary-btn">
+                Salvează notițele
+            </button>
+
+            <div class="notes-update-log">
+                <h3>Ce am făcut azi</h3>
+                <ul id="notesUpdateLogList" class="notes-update-log-list"></ul>
+            </div>
+
+        </div>
+    </div>
+    <!-- Notify changes -->
+    <div id="updatesModal" class="modal">
+        <div class="modal-box">
+
+            <button class="modal-close" data-close="updatesModal">×</button>
+
+            <div class="modal-icon">📝</div>
+            <h2>Notify Changes</h2>
+            <p>Ultimele actualizări ale site-ului.</p>
+
+            <div id="updateList" class="update-list"></div>
+
+        </div>
+    </div>`n    <!-- SETTINGS MODAL -->
+    <div id="settingsModal" class="modal">
+        <div class="modal-box settings-box">
+
+            <button class="modal-close" data-close="settingsModal">×</button>
+
+            <div class="modal-icon">™</div>
+            <h2>Setări</h2>
+
+            <div class="setting-section">
+
+                <h3> Culoare</h3>
+                <p>Alege una dintre cele 67 de culori.</p>
+
+                <div id="colorGrid" class="color-grid"></div>
+
+            </div>
+
+            <div class="setting-section">
+
+                <h3>🔔 Notificări pe acest site</h3>
+
+                <label class="switch-row">
+                    <span>Activează anunțurile site-ului</span>
+                    <input type="checkbox" id="notificationToggle">
+                    <span class="switch"></span>
+                </label>
+                <p>Anunțurile sunt afișate pe site; această opțiune nu activează notificările sistemului telefonului sau
+                    calculatorului.</p>
+
+            </div>
+
+            <div class="setting-section">
+
+                <h3>ă Sunet la apăsare</h3>
+                <p>Alege sunetul folosit de butonul de sunet pe telefon și calculator.</p>
+                <label class="sound-picker-label" for="soundTypeSelect">Sunet</label>
+                <select id="soundTypeSelect" class="sound-type-select" data-sound-control>
+                    <option value="classic">Click clasic</option>
+                    <option value="bell">Clopoțel</option>
+                    <option value="retro">Retro</option>
+                    <option value="soft">Ton discret</option>
+                    <option value="chime">Armonios</option>
+                    <option value="pop">Pop</option>
+                    <option value="bubbly">Bule</option>
+                    <option value="pulse">Puls</option>
+                </select>
+                <button id="previewSoundButton" class="secondary-btn sound-preview-btn" type="button"
+                    data-sound-control>
+                    <i class="fa-solid fa-play" aria-hidden="true"></i>
+                    Ascultă o previzualizare
+                </button>
+                <p id="soundSettingsStatus" class="settings-status" role="status" aria-live="polite"></p>
+
+            </div>
+
+            <div class="setting-section">
+
+                <h3>ă Aspect și accesibilitate</h3>
+
+                <label class="switch-row">
+                    <span>Mod luminos</span>
+                    <input type="checkbox" id="themeToggle">
+                    <span class="switch"></span>
+                </label>
+
+                <label class="switch-row">
+                    <span>Contrast ridicat</span>
+                    <input type="checkbox" id="contrastToggle">
+                    <span class="switch"></span>
+                </label>
+
+                <label class="switch-row">
+                    <span>Redu animațiile</span>
+                    <input type="checkbox" id="motionToggle">
+                    <span class="switch"></span>
+                </label>
+
+                <button id="resetSettings" class="secondary-btn reset-settings-btn" type="button">
+                    <i class="fa-solid fa-rotate-left" aria-hidden="true"></i>
+                    Resetează setările
+                </button>
+                <p id="settingsStatus" class="settings-status" role="status" aria-live="polite"></p>
+
+            </div>
+
+            <div class="setting-section">
+
+                <h3>¤ Dimensiunea textului</h3>
+
+                <div class="text-size-buttons">
+                    <button data-text-size="small">Mic</button>
+                    <button data-text-size="medium">Mediu</button>
+                    <button data-text-size="large">Mare</button>
+                    <button data-text-size="extra">Extra mare</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ABOUT US MODAL -->
+    <div id="pointsModal" class="modal">
+        <div class="modal-box about-us-box">
+
+            <button class="modal-close" data-close="pointsModal" aria-label="Închide">×</button>
+
+            <div class="modal-icon about-us-icon"><i class="fa-solid fa-users" aria-hidden="true"></i></div>
+
+            <h2>Despre noi</h2>
+            <p class="about-us-intro">Echipa din spatele ătirilor lui Vitea</p>
+
+            <div class="about-us-profiles">
+                <article class="about-us-profile">
+                    <div class="about-us-profile-heading">
+                        <span class="about-us-avatar" aria-hidden="true"><i class="fa-solid fa-microphone"></i></span>
+                        <div>
+                            <h3>Vitea</h3>
+                            <p>Prezentator de știri</p>
+                        </div>
+                    </div>
+                    <dl class="about-us-details">
+                        <div>
+                            <dt>Vărsta</dt>
+                            <dd>13 ani</dd>
+                        </div>
+                        <div>
+                            <dt>ăcoala</dt>
+                            <dd>Liceul Teoretic „Ioan Vodă”</dd>
+                        </div>
+                        <div>
+                            <dt>Clasa</dt>
+                            <dd>VII-A</dd>
+                        </div>
+                        <div>
+                            <dt>Și place</dt>
+                            <dd>Să facă știri</dd>
+                        </div>
+                    </dl>
+                </article>
+
+                <article class="about-us-profile">
+                    <div class="about-us-profile-heading">
+                        <span class="about-us-avatar about-us-avatar-egor" aria-hidden="true"><i
+                                class="fa-solid fa-code"></i></span>
+                        <div>
+                            <h3>Egor</h3>
+                            <p>Creator de site</p>
+                        </div>
+                    </div>
+                    <dl class="about-us-details">
+                        <div>
+                            <dt>Vărsta</dt>
+                            <dd>13 ani</dd>
+                        </div>
+                        <div>
+                            <dt>ăcoala</dt>
+                            <dd>Liceul Teoretic „Ioan Vodă”</dd>
+                        </div>
+                        <div>
+                            <dt>Clasa</dt>
+                            <dd>VII-A</dd>
+                        </div>
+                        <div>
+                            <dt>Și place</dt>
+                            <dd>Să creeze jocuri și site-uri</dd>
+                        </div>
+                    </dl>
+                </article>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- FORTUNE WHEEL MODAL -->
+    <div id="fortuneWheelModal" class="modal">
+        <div class="modal-box fortune-wheel-box">
+            <button class="modal-close" data-close="fortuneWheelModal" aria-label="Închide">×</button>
+
+            <div class="modal-icon fortune-wheel-icon"><i class="fa-solid fa-dharmachakra"></i></div>
+            <h2>Roata norocului</h2>
+            <p class="fortune-intro">Află dacă Vitea va face știri astăzi!</p>
+            <p class="fortune-weekly-countdown">Următorul bonus premium în: <span id="fortuneWeeklyCountdown">Se
+                    calculează...</span></p>
+
+            <div class="fortune-wheel-wrap">
+                <span class="fortune-pointer" aria-hidden="true"></span>
+                <div id="fortuneWheel" class="fortune-wheel" role="img" aria-label="Roată cu 20 de semne plus și minus">
+                    <div id="fortuneWheelLabels" class="fortune-wheel-labels" aria-hidden="true"></div>
+                </div>
+                <button id="spinFortuneWheel" class="fortune-spin-button" type="button">
+                    <span>ROTEăTE</span>
+                    <small>DOAR VITEA</small>
+                </button>
+            </div>
+
+            <div id="fortuneOutcome" class="fortune-outcome" aria-hidden="true">
+                <i id="fortuneOutcomeIcon" class="fa-solid fa-star"></i>
+                <span id="fortuneOutcomeText"></span>
+            </div>
+            <p id="fortuneResult" class="fortune-result" role="status" aria-live="polite">
+                Apasă butonul din mijloc și rotește pentru norocul știrii!
+            </p>
+        </div>
+    </div>
+
+    <!-- DESKTOP QUICK FUNCTIONS -->
+    <div id="quickFunctionsModal" class="modal quick-functions-modal">
+        <div class="modal-box quick-functions-box" role="dialog" aria-modal="true"
+            aria-labelledby="quickFunctionsTitle">
+            <button class="modal-close" data-close="quickFunctionsModal"
+                aria-label="Închide funcțiile rapide">×</button>
+            <div class="modal-icon quick-functions-icon"><i class="fa-solid fa-bolt" aria-hidden="true"></i></div>
+            <h2 id="quickFunctionsTitle">Funcții rapide</h2>
+            <p>Accesează imediat comenzile site-ului.</p>
+
+            <div class="quick-functions-list">
+                <button class="quick-function-action" id="quickSearchAction" data-quick-action="search" type="button">
+                    <span class="quick-function-icon"><i class="fa-solid fa-magnifying-glass"
+                            aria-hidden="true"></i></span>
+                    <span class="quick-function-copy"><strong>Caută pe site</strong><small>Meniuri, instrumente și
+                            acțiuni</small></span>
+                    <i class="fa-solid fa-arrow-right quick-function-arrow" aria-hidden="true"></i>
+                </button>
+                <button class="quick-function-action" id="quickTimeAction" data-quick-action="time" type="button">
+                    <span class="quick-function-icon"><i class="fa-regular fa-clock" aria-hidden="true"></i></span>
+                    <span class="quick-function-copy"><strong>Ora actuală</strong><small>Vezi ora și data de
+                            acum</small></span>
+                    <i class="fa-solid fa-arrow-right quick-function-arrow" aria-hidden="true"></i>
+                </button>
+                <button class="quick-function-action" id="quickSoundAction" data-quick-action="sound" type="button">
+                    <span class="quick-function-icon"><i id="quickSoundIcon" class="fa-solid fa-volume-xmark"
+                            aria-hidden="true"></i></span>
+                    <span class="quick-function-copy"><strong>Sunet la apăsare</strong><small
+                            id="quickSoundStatus">Dezactivat</small></span>
+                    <i class="fa-solid fa-arrow-right quick-function-arrow" aria-hidden="true"></i>
+                </button>
+                <button class="quick-function-action" id="quickRefreshAction" data-quick-action="refresh" type="button">
+                    <span class="quick-function-icon"><i class="fa-solid fa-rotate-right" aria-hidden="true"></i></span>
+                    <span class="quick-function-copy"><strong>Reîmprospătează site-ul</strong><small>Cu confirmare
+                            înainte de reîncărcare</small></span>
+                    <i class="fa-solid fa-arrow-right quick-function-arrow" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="soundPickerModal" class="modal sound-picker-modal">
+        <div class="modal-box sound-picker-box" role="dialog" aria-modal="true" aria-labelledby="soundPickerTitle">
+            <button class="modal-close" data-close="soundPickerModal" aria-label="Închide alegerea sunetului">×</button>
+            <div class="modal-icon sound-picker-icon"><i class="fa-solid fa-volume-high" aria-hidden="true"></i></div>
+            <h2 id="soundPickerTitle">Alege sunetul</h2>
+            <p>Alege un sunet pentru apăsări. Apasă butonul mic de redare ca să-l asculți.</p>
+
+            <label class="switch-row sound-enable-row">
+                <span>Activează sunetul la apăsare</span>
+                <input type="checkbox" id="soundEnabledToggle" data-sound-control>
+                <span class="switch"></span>
+            </label>
+
+            <div id="soundChoices" class="sound-choices" aria-label="Sunete disponibile"></div>
+            <p id="soundPickerStatus" class="settings-status" role="status" aria-live="polite"></p>
+        </div>
+    </div>
+
+
+    <!-- TOAST -->
+    <div id="toast" class="toast">
+        <span id="toastIcon"></span>
+        <span id="toastMessage">Gata!</span>
+    </div>
+
+    <footer class="modern-footer">
+
+        <div class="footer-container">
+
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <i class="fa-solid fa-newspaper spin-title-icon" aria-hidden="true"></i>
+                </div>
+
+                <div>
+                    <h3><span class="sway-title-text">Știrile lui Vitea</span></h3>
+                    <p>Informații și noutăți într-un singur loc.</p>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <div>
+                    <h4>Navigare</h4>
+                    <a href="#home">
+                        <i class="fa-solid fa-house"></i>
+                        Acasă
+                    </a>
+                    <a href="#news">
+                        <i class="fa-solid fa-newspaper spin-title-icon" aria-hidden="true"></i>
+                        <span class="sway-title-text">Ultimele știri</span>
+                    </a>
+                    <a href="#info">
+                        <i class="fa-solid fa-circle-info"></i>
+                        Informații
+                    </a>
+                    <a href="#contact">
+                        <i class="fa-solid fa-envelope spin-title-icon" aria-hidden="true"></i>
+                        <span class="sway-title-text">Contact</span>
+                    </a>
+                </div>
+
+                <div>
+                    <h4>Funcțiile ajutătoare</h4>
+                    <a href="safety.html">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        Respect și siguranță
+                    </a>
+                    <a href="help.html">
+                        <i class="fa-solid fa-circle-question"></i>
+                        Ajutor
+                    </a>
+                    <h4 class="footer-submenu-title">Info despre site</h4>
+                    <a href="about-site.html">
+                        <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                        Despre site
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <div>
+                <span>© 2026 Știrile lui Vitea</span>
+                <span class="footer-dot">•</span>
+                <span>Realizat de <strong>Dimov Egor</strong></span>
+            </div>
+
+            <div class="footer-bottom-right">
+                <div class="footer-community">
+                    <div class="footer-social-icons" aria-label="Discord, Viber și Instagram">
+                        <a class="footer-social-icon discord" href="https://discord.com/"
+                            aria-label="Deschide site-ul Discord" title="Discord" target="_blank"
+                            rel="noopener noreferrer">
+                            <i class="fa-brands fa-discord" aria-hidden="true"></i>
+                        </a>
+                        <a class="footer-social-icon viber" href="https://www.viber.com/"
+                            aria-label="Deschide site-ul Viber" title="Viber" target="_blank" rel="noopener noreferrer">
+                            <i class="fa-brands fa-viber" aria-hidden="true"></i>
+                        </a>
+                        <a class="footer-social-icon instagram" href="https://www.instagram.com/"
+                            aria-label="Deschide site-ul Instagram" title="Instagram" target="_blank"
+                            rel="noopener noreferrer">
+                            <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                    <span class="footer-community-message">încă nu avem grupuri. Vor apărea mai încolo...</span>
+                </div>
+
+                <div class="footer-status">
+                    <span class="footer-status-label">
+                        <span class="status-dot"></span>
+                        Site activ
+                    </span>
+                    <p id="visitReturnStatus" class="visit-return-status" role="status" aria-live="polite">
+                        încă nu ai plecat de pe site.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
